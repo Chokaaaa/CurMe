@@ -49,14 +49,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		841B702A271BE25600BF1E89 /* Currency Circles */ = {
-			isa = PBXGroup;
-			children = (
-				84C3CC5D26888F7C0065C168 /* CurrencyView.swift */,
-			);
-			path = "Currency Circles";
-			sourceTree = "<group>";
-		};
 		8481A57C26863C1600893C0B = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +111,7 @@
 				8481A59A26863C6D00893C0B /* Home.swift */,
 				848A2BFB26BD730400241888 /* networkMonitor.swift */,
 				84C3CC572688664A0065C168 /* NumberView.swift */,
-				841B702A271BE25600BF1E89 /* Currency Circles */,
+				84C3CC5D26888F7C0065C168 /* CurrencyView.swift */,
 				84C3CC612689D56C0065C168 /* ActionView.swift */,
 			);
 			path = View;
