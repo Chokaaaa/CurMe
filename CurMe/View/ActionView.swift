@@ -16,7 +16,7 @@ struct ActionView: View {
         func image() -> Image {
             switch self {
             case .equal: return Image(systemName: "equal")
-            case .clear: return Image(systemName: "xmark.circle")
+            case .clear: return Image("AC")
             case .plus: return Image(systemName: "plus")
             case .minus: return Image(systemName: "minus")
             case .multiply: return Image(systemName: "multiply")
@@ -24,6 +24,8 @@ struct ActionView: View {
             case .percent: return Image(systemName: "percent")
             }
         }
+        
+        
         func calculate(_ input1: Double, _ input2: Double) -> Double? {
             
             switch self {
@@ -32,18 +34,20 @@ struct ActionView: View {
             case.minus: return input1 - input2
             case.multiply: return input1 * input2
             case.divide: return input1 / input2
-            case.percent: return input1 / input2 * 100
             
             
             default: return nil
             }
             
         }
+        
     }
     
     
     let action: Action
+//    let cur: CurrencyView
     @Binding var state : CalculationState
+//    @Binding var cur : CurrencyView
     
     //MARK: - Body
     
@@ -60,23 +64,33 @@ struct ActionView: View {
         
     }
     
-    private func tapped() {
+        func tapped() {
         switch action {
         case .clear:
             
+            //Clear button is pressed.
             state.currentNumber = 0
             state.storedNumber = nil
             state.storedAction = nil
+//            state.currencyLight = false
+//            state.circleBorder = false
+//            state.tappedAgain = false
             
+            
+
             break
+            
+            //Equal Button is pressed
         case .equal:
             guard let storedAction = state.storedAction else {
+                
                 return
             }
             
             guard let storedNumber = state.storedNumber else {
                 return
             }
+            
             
             guard let result = storedAction.calculate(storedNumber, state.currentNumber) else {
                 return
@@ -88,12 +102,19 @@ struct ActionView: View {
             state.storedAction = nil
             
             break
+            
+            //Percent button is pressed
+        case .percent:
+
+            
+            state.currentNumber = state.currentNumber * 0.01
+            
         default:
             
-            
-            state.storedNumber = state.currentNumber
+            state.storedNumber = state.currentNumber            
             state.currentNumber = 0
             state.storedAction = action
+            
             break
         }
     }

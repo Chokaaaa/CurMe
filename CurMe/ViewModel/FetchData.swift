@@ -9,34 +9,28 @@ import SwiftUI
 
 class FetchData: ObservableObject {
     
-    @Published var coversionData: [Currency] = []
+    //@Published var coversionData: [Currency] = []
     @Published var baseCode = "USD"
-    @Published var filteredCurrency = "KZT"
+    //@Published var filteredCurrency = "KZT"
+    static var conversionData: Conversion? = nil
+
     
-    init() {
-        fetch()
-    }
     
-    func fetch() {
-        
+    //"https://api-test.bcc.kz/bcc/production/v1/public/rates"
+    
+    func fetch(function: String = #function) {
+        print("function:\(function)")
         let url = "https://open.exchangerate-api.com/v6/latest?base=\(baseCode)"
+        print("url:\(url)")
         
         let session = URLSession(configuration: .default)
-        session.dataTask(with: URL(string: url)!) { data, _, _ in
+        session.dataTask(with: URL(string: url)!) { data, _, error in
             
             guard let JSONData = data else {return}
             
             do {
                 let conversion = try JSONDecoder().decode(Conversion.self, from: JSONData)
-                
-                DispatchQueue.main.async {
-                    self.coversionData = conversion.rates.compactMap({ (key,value) -> Currency? in
-                        return Currency(currencyName: key, currencyValue: value)
-                    })
-                    .filter({ Currency in
-                        Currency.currencyName == self.filteredCurrency
-                    })
-                }
+                FetchData.conversionData = conversion
             }
             catch {
                 print(error)
@@ -49,7 +43,7 @@ class FetchData: ObservableObject {
         
         self.baseCode = baseCode
         
-        self.coversionData.removeAll()
+        FetchData.conversionData = nil
         fetch()
         
     }

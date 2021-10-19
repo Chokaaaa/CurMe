@@ -5,6 +5,8 @@
 //  Created by Nursultan Yelemessov on 27/06/2021.
 //
 
+//Appearance number view
+
 import SwiftUI
 
 struct NumberView: View {
@@ -34,5 +36,6 @@ struct NumberView: View {
             .onTapGesture {
                 self.state.appendNumber(self.number)
             }
+            .minimumScaleFactor(0.1)
     }
 }

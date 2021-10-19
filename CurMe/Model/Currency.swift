@@ -15,8 +15,8 @@ struct Currency: Identifiable {
     
 }
 
-var selectedCurrencie = ["USD", "AED", "KZT", "RUB"]
+//var selectedCurrencie = ["USD", "AED", "KZT", "RUB"]
 
 var currencies = ["USD", "AED", "KZT", "RUB"]
 
-var kazCurrency = ["KZT"]
+//var kazCurrency = ["KZT"]
